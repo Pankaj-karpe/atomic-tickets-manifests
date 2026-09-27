@@ -3,6 +3,7 @@ kind: Ingress
 metadata:
   name: atomic-tickets-ingress
   annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
     nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
 spec:
@@ -17,15 +18,15 @@ spec:
             name: frontend
             port: 
               number: 80
-      - path: /api
-        pathType: Prefix
+      - path: /api(/|$)(.*)
+        pathType: ImplementationSpecific
         backend:
           service:
             name: backend
             port: 
               number: 8000
-      - path: /ws
-        pathType: Prefix
+      - path: /ws(/|$)(.*)
+        pathType: ImplementationSpecific
         backend:
           service:
             name: backend
