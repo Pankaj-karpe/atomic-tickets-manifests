@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: backend-monitor
+  namespace: monitoring
+  labels:
+    release: monitroing
+spec:
+  selector:
+    matchlabels:
+      app: backend
+  namespaceSelector:
+    matchNames:
+      - at
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 15s
