@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: celery-worker
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: celery-worker
+  template:
+    metadata:
+      labels:
+        app: celery-worker
+    spec:
+      initContainers:
+        - name: wait-for-rabbitmq
+          image: busybox
+          command:
+            - sh 
+            - -c
+            - until nc -z rabbitmq 5672 ; do sleep 2; done
+      containers:
+        - name: celery-worker
+          image: pankajkarpe1/atomic-tickets-pt:latest
+          command: ["python3", "-m", "celery", "-A", "app.celeryapp", "worker", "--loglevel=info"]
+          envFrom:
+            - configMapRef: { name: atomic-tickets-config }
+            - secretRef: { name: atomic-tickets-secrets }

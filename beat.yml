@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: celery-beat
+spec:
+  replicas: 1 # NEVER more than 1 — duplicate beats double-fire scheduled tasks
+  selector:
+    matchLabels:
+      app: celery-beat
+  template:
+    metadata:
+      labels:
+        app: celery-beat
+    spec:
+      initContainers:
+        - name: wait-for-rabbitmq
+          image: busybox
+          command:
+            - sh 
+            - -c
+            - until nc -z rabbitmq 5672 ; do sleep 2; done
+      containers:
+        - name: celery-beat
+          image: pankajkarpe1/atomic-tickets-pt:latest
+          command: ["python3", "-m", "celery", "-A", "app.celeryapp", "beat", "--loglevel=info"]
+          envFrom:
+            - configMapRef: { name: atomic-tickets-config }
+            - secretRef: { name: atomic-tickets-secrets }
