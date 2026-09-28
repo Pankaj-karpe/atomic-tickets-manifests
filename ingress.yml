@@ -1,9 +1,8 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: atomic-tickets-ingress
+  name: atomic-tickets-frontend
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
     nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
 spec:
@@ -16,19 +15,33 @@ spec:
         backend:
           service:
             name: frontend
-            port: 
+            port:
               number: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: atomic-tickets-backend
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
       - path: /api(/|$)(.*)
         pathType: ImplementationSpecific
         backend:
           service:
             name: backend
-            port: 
+            port:
               number: 8000
       - path: /ws(/|$)(.*)
         pathType: ImplementationSpecific
         backend:
           service:
             name: backend
-            port: 
+            port:
               number: 8000
