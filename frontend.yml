@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: pankajkarpe1/atomic-tickets-fe-pt:68a47d3
+          image: pankajkarpe1/atomic-tickets-fe-pt:02a32b1
           ports:
             - containerPort: 3000
           readinessProbe:
