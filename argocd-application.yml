@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/Pankaj-karpe/atomic-tickets-manifests.git
     targetRevision: main
-    path: .
+    path: overlays/dev
   destination:
     server: https://kubernetes.default.svc
     namespace: at
@@ -18,3 +18,8 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+  ignoreDifferences:
+    - group: monitoring.coreos.com
+      kind: ServiceMonitor
+      jsonPointers:
+        - /spec
