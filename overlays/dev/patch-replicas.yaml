@@ -4,4 +4,20 @@ metadata:
   name: backend
   namespace: at
 spec:
-  replicas: 2
+  replicas: 1
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: celery-worker
+  namespace: at
+spec:
+  replicas: 1
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: at
+spec:
+  replicas: 1

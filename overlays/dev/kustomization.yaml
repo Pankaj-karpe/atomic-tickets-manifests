@@ -6,5 +6,3 @@ resources:
 
 patches:
   - path: patch-replicas.yaml
-
-namePrefix: dev-
