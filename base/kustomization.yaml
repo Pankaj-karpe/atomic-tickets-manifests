@@ -5,12 +5,12 @@ kind: Kustomization
 resources:
   - backend.yml
   - beat.yml
-  - configmap.yaml
+  - configmap.yml
   - ingress.yml
-  - kustomization.yaml
   - namespace.yml
   - postgres.yml
   - rabbitmq.yml
   - secret.yml
   - servicemonitor.yml
   - worker.yml
+  - frontend.yml
