@@ -4,7 +4,7 @@ metadata:
   name: backend
   namespace: at
 spec:
-  replicas: 1
+  replicas: 4
 ---
 apiVersion: apps/v1
 kind: Deployment
