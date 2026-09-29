@@ -23,7 +23,7 @@ spec:
       containers:
         - name: celery-worker
           image: pankajkarpe1/atomic-tickets-pt:c0ec657
-          command: ["python3", "-m", "celery", "-A", "app.celeryapp", "worker", "--loglevel=info"]
+          command: ["python3", "-m", "celery", "-A", "app.celeryapp", "worker", "--loglevel=info", "--concurrency=2"]
           envFrom:
             - configMapRef: { name: atomic-tickets-config }
             - secretRef: { name: atomic-tickets-secrets }
