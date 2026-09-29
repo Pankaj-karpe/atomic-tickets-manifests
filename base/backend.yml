@@ -22,7 +22,7 @@ spec:
             - until pg_isready -h postgres -p 5432 -U postgres; do sleep 2; done
       containers:
         - name: backend
-          image: pankajkarpe1/atomic-tickets-pt:b3df5b4
+          image: pankajkarpe1/atomic-tickets-pt:d969af0
           ports:
             - containerPort: 8000
           envFrom:
