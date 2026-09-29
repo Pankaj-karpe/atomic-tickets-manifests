@@ -6,7 +6,7 @@ metadata:
 data:
   ALGORITHM: "HS256"
   ACCESS_TOKEN_EXPIRE_MINUTES: "60"
-  HOLD_EXPIRY_MINUTES: "15"
+  HOLD_EXPIRY_MINUTES: "1"
   REFUND_CUTOFF_HOURS: "24"
   BROKER_URL: "amqp://guest:guest@rabbitmq:5672//"
   FASTAPI_INTERNAL_URL: "http://backend:8000"
