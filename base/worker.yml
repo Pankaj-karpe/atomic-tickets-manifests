@@ -22,7 +22,7 @@ spec:
             - until nc -z rabbitmq 5672 ; do sleep 2; done
       containers:
         - name: celery-worker
-          image: pankajkarpe1/atomic-tickets-pt:c0ec657
+          image: pankajkarpe1/atomic-tickets-pt:909981f
           command: ["python3", "-m", "celery", "-A", "app.celeryapp", "worker", "--loglevel=info", "--concurrency=2"]
           envFrom:
             - configMapRef: { name: atomic-tickets-config }
