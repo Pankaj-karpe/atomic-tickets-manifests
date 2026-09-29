@@ -14,3 +14,5 @@ resources:
   - servicemonitor.yml
   - worker.yml
   - frontend.yml
+  - keda-rabbitmq-auth.yml
+  - keda-scaledobject.yml
