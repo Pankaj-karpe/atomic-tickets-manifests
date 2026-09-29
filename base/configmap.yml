@@ -14,3 +14,4 @@ data:
   SMTP_HOST: "sandbox.smtp.mailtrap.io"
   SMTP_PORT: "2525"
   FROM_EMAIL: "noreply@atomictickets.com"
+  OTEL_EXPORTER_OTLP_ENDPOINT: "http://jaeger.tracing.svc.cluster.local:4317"
