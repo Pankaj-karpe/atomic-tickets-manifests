@@ -15,7 +15,7 @@ spec:
       metadata:
         queueName: celery
         mode: QueueLength
-        value: "1"
+        value: "10"
         protocol: http
       authenticationRef:
         name: rabbitmq-trigger-auth
