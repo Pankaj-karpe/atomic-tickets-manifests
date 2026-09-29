@@ -1,5 +1,5 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: backend
   namespace: at
@@ -12,6 +12,15 @@ spec:
     metadata:
       labels:
         app: backend
+  strategy:
+    canary:
+      steps:
+        - setweight: 25
+        - pause: {duration: 60}
+        - setweight: 50
+        - pause: {duration: 60}
+        - setweight: 75
+        - pause: {duration: 100}
     spec:
       initContainers:
         - name: wait-for-postgres
